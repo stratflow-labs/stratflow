@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package stratflow.identity.v1;
+
+option go_package = "github.com/stratflow-labs/stratflow/services/identity/gen/go/proto/v1;identityv1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "proto/v1/types.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Backend API";
+    version: "1.0.0";
+  };
+  base_path: "/api";
+  consumes: "application/json";
+  produces: "application/json";
+};
+
+service IdentityService {
+  rpc Login(LoginRequest) returns (TokenEnvelope) {
+    option (google.api.http) = {
+      post: "/api/auth/login"
+      body: "*"
+    };
+  }
+
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/api/auth/logout"
+      body: "*"
+    };
+  }
+
+  rpc VerifyToken(VerifyTokenRequest) returns (VerifyTokenResponse) {
+    option (google.api.http) = {
+      post: "/api/internal/auth/verify-token"
+      body: "*"
+    };
+  }
+
+  rpc CreateUser(CreateUserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      post: "/api/users"
+      body: "*"
+    };
+  }
+
+  rpc ListUsers(ListUsersRequest) returns (UsersListResponse) {
+    option (google.api.http) = {
+      get: "/api/users"
+    };
+  }
+
+  rpc GetUser(GetUserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/api/users/{user_id}"
+    };
+  }
+
+  rpc UpdateUser(UpdateUserByIDRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      put: "/api/users/{user_id}"
+      body: "patch"
+    };
+  }
+
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/users/{user_id}"
+    };
+  }
+
+  rpc GetCurrentUser(GetCurrentUserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      get: "/api/users/me"
+    };
+  }
+
+  rpc UpdateCurrentUser(UpdateCurrentUserRequest) returns (UserResponse) {
+    option (google.api.http) = {
+      put: "/api/users/me"
+      body: "patch"
+    };
+  }
+
+  rpc DeleteCurrentUser(DeleteCurrentUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/users/me"
+    };
+  }
+}

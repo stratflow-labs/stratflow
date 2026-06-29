@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package stratflow.identity.v1;
+
+option go_package = "github.com/stratflow-labs/stratflow/services/identity/gen/go/proto/v1;identityv1";
+
+import "google/protobuf/timestamp.proto";
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_USER = 1;
+  ROLE_MANAGER = 2;
+  ROLE_ADMIN = 3;
+}
+
+enum Gender {
+  GENDER_UNSPECIFIED = 0;
+  GENDER_MALE = 1;
+  GENDER_FEMALE = 2;
+}
+
+message LoginRequest {
+  string login = 1;
+  string password = 2;
+}
+
+message CreateUserRequest {
+  string login = 1;
+  string name = 2;
+  string last_name = 3;
+  string email = 4;
+  string role = 5;
+  string password = 6;
+  optional int32 gender = 7;
+}
+
+message UpdateUserRequest {
+  optional string name = 1;
+  optional string last_name = 2;
+  optional string email = 3;
+  optional int32 gender = 4;
+}
+
+message VerifyTokenRequest {
+  string access_token = 1;
+}
+
+message LogoutRequest {}
+
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message DeleteUserRequest {
+  string user_id = 1;
+}
+
+message UpdateUserByIDRequest {
+  string user_id = 1;
+  UpdateUserRequest patch = 2;
+}
+
+message ListUsersRequest {
+  optional string search = 1;
+  optional int32 page = 2;
+  optional int32 page_size = 3;
+  optional string sort = 4;
+}
+
+message GetCurrentUserRequest {}
+
+message UpdateCurrentUserRequest {
+  UpdateUserRequest patch = 1;
+}
+
+message DeleteCurrentUserRequest {}
+
+message TokenPair {
+  string access_token = 1;
+}
+
+message TokenEnvelope {
+  string message = 1;
+  TokenPair data = 2;
+}
+
+message User {
+  string id = 1;
+  string login = 2;
+  string name = 3;
+  string last_name = 4;
+  optional string email = 5;
+  string role = 6;
+  optional int32 gender = 7;
+  optional string image_url = 8;
+  bool is_email_verified = 9;
+  bool is_verified = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
+
+message UserResponse {
+  string message = 1;
+  User data = 2;
+}
+
+message UsersListData {
+  repeated User items = 1;
+  int64 total = 2;
+}
+
+message UsersListResponse {
+  string message = 1;
+  UsersListData data = 2;
+}
+
+message VerifyTokenResponse {
+  string user_id = 1;
+  Role role = 2;
+}

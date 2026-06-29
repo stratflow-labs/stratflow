@@ -1,0 +1,1225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/v1/strategy_types.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "StrategyRegistryService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/strategies": {
+      "get": {
+        "operationId": "StrategyRegistryService_ListStrategies",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StrategiesListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "post": {
+        "operationId": "StrategyRegistryService_CreateStrategy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StrategyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateStrategyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/clone": {
+      "post": {
+        "operationId": "StrategyRegistryService_CloneStrategies",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StrategiesListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CloneStrategiesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/{strategyRef}": {
+      "get": {
+        "operationId": "StrategyRegistryService_GetStrategy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StrategyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "delete": {
+        "operationId": "StrategyRegistryService_DeleteStrategy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "patch": {
+        "operationId": "StrategyRegistryService_UpdateStrategy",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StrategyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateStrategyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/{strategyRef}/attributes": {
+      "get": {
+        "operationId": "StrategyRegistryService_ListAttributes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttributesListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "post": {
+        "operationId": "StrategyRegistryService_CreateAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttributeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyRegistryServiceCreateAttributeBody"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/{strategyRef}/attributes/{attributeRef}": {
+      "get": {
+        "operationId": "StrategyRegistryService_GetAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttributeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "delete": {
+        "operationId": "StrategyRegistryService_DeleteAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "patch": {
+        "operationId": "StrategyRegistryService_UpdateAttribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttributeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateAttributePatch"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/{strategyRef}/attributes/{attributeRef}/values": {
+      "post": {
+        "operationId": "StrategyRegistryService_CreateAttributeValue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttributeValueResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyRegistryServiceCreateAttributeValueBody"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/{strategyRef}/attributes/{attributeRef}/values/{valueRef}": {
+      "delete": {
+        "operationId": "StrategyRegistryService_DeleteAttributeValue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "valueRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      },
+      "patch": {
+        "operationId": "StrategyRegistryService_UpdateAttributeValue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AttributeValueResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "valueRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateAttributeValuePatch"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    },
+    "/api/strategies/{strategyRef}/graph": {
+      "patch": {
+        "operationId": "StrategyRegistryService_BatchActionStrategyGraph",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StrategyGraphResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "strategyRef",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StrategyRegistryServiceBatchActionStrategyGraphBody"
+            }
+          }
+        ],
+        "tags": [
+          "StrategyRegistryService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "StrategyRegistryServiceBatchActionStrategyGraphBody": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1StrategyGraphAction"
+          }
+        }
+      }
+    },
+    "StrategyRegistryServiceCreateAttributeBody": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "StrategyRegistryServiceCreateAttributeValueBody": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CreateAttributeValueRelationInput"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AttributeResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1AttributeWithValues"
+        }
+      }
+    },
+    "v1AttributeValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "attributeId": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AttributeValueRelationInline"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1AttributeValueInline": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "attributeId": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AttributeValueRelationInline"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1AttributeValueRelationInline": {
+      "type": "object",
+      "properties": {
+        "fromAttributeId": {
+          "type": "string"
+        },
+        "fromValueId": {
+          "type": "string"
+        },
+        "toAttributeId": {
+          "type": "string"
+        },
+        "toValueId": {
+          "type": "string"
+        },
+        "toAttributeSlug": {
+          "type": "string"
+        },
+        "toValueSlug": {
+          "type": "string"
+        }
+      }
+    },
+    "v1AttributeValueResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1AttributeValue"
+        }
+      }
+    },
+    "v1AttributeWithValues": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "strategyId": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AttributeValueInline"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1AttributesListData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AttributeWithValues"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1AttributesListResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1AttributesListData"
+        }
+      }
+    },
+    "v1CloneStrategiesRequest": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1CloneStrategyItemInput"
+          }
+        }
+      }
+    },
+    "v1CloneStrategyItemInput": {
+      "type": "object",
+      "properties": {
+        "sourceStrategyId": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateAttributeValueRelationInput": {
+      "type": "object",
+      "properties": {
+        "toAttributeId": {
+          "type": "string"
+        },
+        "toAttributeSlug": {
+          "type": "string"
+        },
+        "toValueId": {
+          "type": "string"
+        },
+        "toValueSlug": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateStrategyRequest": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GraphActionCreateAttribute": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GraphActionCreateValue": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GraphActionDeleteAttribute": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        }
+      }
+    },
+    "v1GraphActionDeleteValue": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        },
+        "valueRef": {
+          "$ref": "#/definitions/v1GraphValueRef"
+        }
+      }
+    },
+    "v1GraphActionReplaceRelations": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        },
+        "valueRef": {
+          "$ref": "#/definitions/v1GraphValueRef"
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1GraphRelationTargetRef"
+          }
+        }
+      }
+    },
+    "v1GraphActionUpdateAttribute": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GraphActionUpdateValue": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        },
+        "valueRef": {
+          "$ref": "#/definitions/v1GraphValueRef"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GraphAttributeRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GraphRelationTargetRef": {
+      "type": "object",
+      "properties": {
+        "attributeRef": {
+          "$ref": "#/definitions/v1GraphAttributeRef"
+        },
+        "valueRef": {
+          "$ref": "#/definitions/v1GraphValueRef"
+        }
+      }
+    },
+    "v1GraphValueRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "v1StrategiesListData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Strategy"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "v1StrategiesListResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1StrategiesListData"
+        }
+      }
+    },
+    "v1Strategy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1StrategyGraphAction": {
+      "type": "object",
+      "properties": {
+        "createAttribute": {
+          "$ref": "#/definitions/v1GraphActionCreateAttribute"
+        },
+        "updateAttribute": {
+          "$ref": "#/definitions/v1GraphActionUpdateAttribute"
+        },
+        "deleteAttribute": {
+          "$ref": "#/definitions/v1GraphActionDeleteAttribute"
+        },
+        "createValue": {
+          "$ref": "#/definitions/v1GraphActionCreateValue"
+        },
+        "updateValue": {
+          "$ref": "#/definitions/v1GraphActionUpdateValue"
+        },
+        "deleteValue": {
+          "$ref": "#/definitions/v1GraphActionDeleteValue"
+        },
+        "replaceRelations": {
+          "$ref": "#/definitions/v1GraphActionReplaceRelations"
+        }
+      }
+    },
+    "v1StrategyGraphResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1StrategyWithParameters"
+        }
+      }
+    },
+    "v1StrategyResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1Strategy"
+        }
+      }
+    },
+    "v1StrategyWithParameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1AttributeWithValues"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1UpdateAttributePatch": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateAttributeValuePatch": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UpdateAttributeValueRelationInput"
+          }
+        }
+      }
+    },
+    "v1UpdateAttributeValueRelationInput": {
+      "type": "object",
+      "properties": {
+        "toAttributeId": {
+          "type": "string"
+        },
+        "toValueId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateStrategyRequest": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

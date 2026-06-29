@@ -1,0 +1,80 @@
+.container {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fcfdff 0%, #f6f8fb 100%);
+}
+
+.container :global(.react-flow),
+.container :global(.react-flow__pane),
+.container :global(.react-flow__renderer),
+.container :global(.react-flow__node),
+.container :global(.react-flow__edge),
+.container :global(.react-flow__edge-path),
+.container :global(.react-flow__handle),
+.container :global(.react-flow__connection-path),
+.container :global(.react-flow__connectionline),
+.container :global(.react-flow__nodesselection-rect),
+.container :global(.react-flow__selection),
+.container :global(.react-flow__viewport) {
+  cursor: default !important;
+}
+
+.container :global(.react-flow__handle) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.container :global(.react-flow__connection-path),
+.container :global(.react-flow__connectionline path) {
+  stroke: transparent !important;
+}
+
+.node {
+  position: relative;
+  min-width: 210px;
+  max-width: 260px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+.nodeSource {
+  border-color: #1976d2;
+  box-shadow:
+    0 0 0 1px rgba(25, 118, 210, 0.32),
+    0 8px 22px rgba(25, 118, 210, 0.16);
+}
+
+.nodeConnected {
+  border-color: #2e7d32;
+}
+
+.nodeSelected {
+  box-shadow:
+    0 0 0 2px rgba(25, 118, 210, 0.26),
+    0 8px 22px rgba(25, 118, 210, 0.14);
+}
+
+.attribute {
+  color: rgba(15, 23, 42, 0.58);
+  font-size: 12px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.value {
+  color: rgba(15, 23, 42, 0.94);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

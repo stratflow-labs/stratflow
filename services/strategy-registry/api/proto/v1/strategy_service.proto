@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package stratflow.strategyregistry.v1;
+
+option go_package = "github.com/stratflow-labs/stratflow/services/strategy-registry/gen/go/proto/v1;strategyregistryv1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "proto/v1/strategy_types.proto";
+
+service StrategyRegistryService {
+  rpc ListStrategies(ListStrategiesRequest) returns (StrategiesListResponse) {
+    option (google.api.http) = {
+      get: "/api/strategies"
+    };
+  }
+
+  rpc CreateStrategy(CreateStrategyRequest) returns (StrategyResponse) {
+    option (google.api.http) = {
+      post: "/api/strategies"
+      body: "*"
+    };
+  }
+
+  rpc GetStrategy(GetStrategyRequest) returns (StrategyResponse) {
+    option (google.api.http) = {
+      get: "/api/strategies/{strategy_ref}"
+    };
+  }
+
+  rpc UpdateStrategy(UpdateStrategyByRefRequest) returns (StrategyResponse) {
+    option (google.api.http) = {
+      patch: "/api/strategies/{strategy_ref}"
+      body: "patch"
+    };
+  }
+
+  rpc DeleteStrategy(DeleteStrategyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/strategies/{strategy_ref}"
+    };
+  }
+
+  rpc CloneStrategies(CloneStrategiesRequest) returns (StrategiesListResponse) {
+    option (google.api.http) = {
+      post: "/api/strategies/clone"
+      body: "*"
+    };
+  }
+
+  rpc ListAttributes(ListAttributesRequest) returns (AttributesListResponse) {
+    option (google.api.http) = {
+      get: "/api/strategies/{strategy_ref}/attributes"
+    };
+  }
+
+  rpc CreateAttribute(CreateAttributeRequest) returns (AttributeResponse) {
+    option (google.api.http) = {
+      post: "/api/strategies/{strategy_ref}/attributes"
+      body: "*"
+    };
+  }
+
+  rpc GetAttribute(GetAttributeRequest) returns (AttributeResponse) {
+    option (google.api.http) = {
+      get: "/api/strategies/{strategy_ref}/attributes/{attribute_ref}"
+    };
+  }
+
+  rpc UpdateAttribute(UpdateAttributeRequest) returns (AttributeResponse) {
+    option (google.api.http) = {
+      patch: "/api/strategies/{strategy_ref}/attributes/{attribute_ref}"
+      body: "patch"
+    };
+  }
+
+  rpc DeleteAttribute(DeleteAttributeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/strategies/{strategy_ref}/attributes/{attribute_ref}"
+    };
+  }
+
+  rpc CreateAttributeValue(CreateAttributeValueRequest) returns (AttributeValueResponse) {
+    option (google.api.http) = {
+      post: "/api/strategies/{strategy_ref}/attributes/{attribute_ref}/values"
+      body: "*"
+    };
+  }
+
+  rpc UpdateAttributeValue(UpdateAttributeValueRequest) returns (AttributeValueResponse) {
+    option (google.api.http) = {
+      patch: "/api/strategies/{strategy_ref}/attributes/{attribute_ref}/values/{value_ref}"
+      body: "patch"
+    };
+  }
+
+  rpc BatchActionStrategyGraph(BatchActionStrategyGraphRequest) returns (StrategyGraphResponse) {
+    option (google.api.http) = {
+      patch: "/api/strategies/{strategy_ref}/graph"
+      body: "*"
+    };
+  }
+
+  rpc DeleteAttributeValue(DeleteAttributeValueRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/api/strategies/{strategy_ref}/attributes/{attribute_ref}/values/{value_ref}"
+    };
+  }
+}

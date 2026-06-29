@@ -1,0 +1,24 @@
+{
+  "name": "stratflow",
+  "version": "0.1.0-alpha",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "web:dev": "npm run dev -w @stratflow/web --",
+    "web:build": "npm run build -w @stratflow/web",
+    "web:start": "npm run start -w @stratflow/web --",
+    "web:lint": "npm run lint -w @stratflow/web",
+    "web:typecheck": "npm run typecheck -w @stratflow/web",
+    "web:format": "npm run format -w @stratflow/web",
+    "web:format:check": "npm run format:check -w @stratflow/web",
+
+    "dev:web": "npm run web:dev",
+    "build:web": "npm run web:build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

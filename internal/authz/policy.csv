@@ -1,0 +1,61 @@
+# --------------------
+# Identity permissions
+# --------------------
+p,admin,identity,users,list,any
+p,admin,identity,users,get,any
+p,admin,identity,users,create,any
+p,admin,identity,users,update,any
+p,admin,identity,users,delete,any
+
+p,admin,identity,session,logout,any
+p,admin,identity,session,refresh,any
+
+p,manager,identity,users,list,any
+p,manager,identity,users,get,any
+p,manager,identity,users,update,any
+
+p,user,identity,users,get,own
+p,user,identity,users,update,own
+p,user,identity,users,delete,own
+p,user,identity,session,logout,own
+p,user,identity,session,refresh,own
+
+# -----------------------------
+# Strategy Registry permissions
+# -----------------------------
+# Strategy and parameter creation is available to admin only.
+p,admin,strategy,strategies,list,any
+p,admin,strategy,strategies,get,any
+p,admin,strategy,strategies,create,any
+p,admin,strategy,strategies,update,any
+p,admin,strategy,strategies,delete,any
+
+p,admin,strategy,parameters,list,any
+p,admin,strategy,parameters,get,any
+p,admin,strategy,parameters,create,any
+p,admin,strategy,parameters,update,any
+p,admin,strategy,parameters,delete,any
+
+p,admin,strategy,parameter_values,list,any
+p,admin,strategy,parameter_values,get,any
+p,admin,strategy,parameter_values,create,any
+p,admin,strategy,parameter_values,update,any
+p,admin,strategy,parameter_values,delete,any
+
+p,manager,strategy,strategies,list,any
+p,manager,strategy,strategies,get,any
+p,manager,strategy,parameters,list,any
+p,manager,strategy,parameters,get,any
+p,manager,strategy,parameter_values,list,any
+p,manager,strategy,parameter_values,get,any
+
+# ----------------
+# Role hierarchy g
+# ----------------
+g,admin,admin,identity
+g,manager,manager,identity
+g,user,user,identity
+
+g,admin,admin,strategy
+g,manager,manager,strategy
+g,user,user,strategy

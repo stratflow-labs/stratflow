@@ -1,0 +1,21 @@
+
+root = "."
+tmp_dir = "deploy/docker/air/tmp/identity"
+
+[build]
+  bin = "deploy/docker/air/tmp/identity/main"
+  cmd = "go build -o deploy/docker/air/tmp/identity/main ./services/identity/cmd/api/main.go"
+  include_ext = ["go"]
+  include_dir = ["services/identity", "internal"]
+  exclude_dir = [
+    "vendor",
+    "tmp",
+    "deploy/docker/air/tmp",
+    "apps",
+    "docs",
+    "services/strategy-registry",
+    "node_modules",
+  ]
+
+[log]
+  level = "debug"

@@ -1,0 +1,12 @@
+version: "2"
+
+sql:
+  - engine: "postgresql"
+    schema:
+      - "gen/schema.sql"
+    queries:
+      - "../internal/adapters/postgres/sqlc/gen/queries"
+    gen:
+      go:
+        package: "identitydbsqlc"
+        out: "../internal/adapters/postgres/sqlc/gen"

@@ -1,0 +1,306 @@
+syntax = "proto3";
+
+package stratflow.strategyregistry.v1;
+
+option go_package = "github.com/stratflow-labs/stratflow/services/strategy-registry/gen/go/proto/v1;strategyregistryv1";
+
+import "google/protobuf/timestamp.proto";
+
+message Strategy {
+  string id = 1;
+  string slug = 2;
+  string name = 3;
+  string description = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message AttributeValueRelationInline {
+  string from_attribute_id = 1;
+  string from_value_id = 2;
+  string to_attribute_id = 3;
+  string to_value_id = 4;
+  optional string to_attribute_slug = 5;
+  optional string to_value_slug = 6;
+}
+
+message AttributeValueInline {
+  string id = 1;
+  string attribute_id = 2;
+  string slug = 3;
+  string value = 4;
+  repeated AttributeValueRelationInline relations = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message AttributeWithValues {
+  string id = 1;
+  string strategy_id = 2;
+  string slug = 3;
+  string name = 4;
+  string description = 5;
+  repeated AttributeValueInline values = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+message AttributeValue {
+  string id = 1;
+  string attribute_id = 2;
+  string slug = 3;
+  string value = 4;
+  repeated AttributeValueRelationInline relations = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message StrategyWithParameters {
+  string id = 1;
+  string slug = 2;
+  string name = 3;
+  string description = 4;
+  repeated AttributeWithValues parameters = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message StrategyGraphResponse {
+  string message = 1;
+  StrategyWithParameters data = 2;
+}
+
+message StrategyResponse {
+  string message = 1;
+  Strategy data = 2;
+}
+
+message StrategiesListData {
+  repeated Strategy items = 1;
+  int64 total = 2;
+}
+
+message StrategiesListResponse {
+  string message = 1;
+  StrategiesListData data = 2;
+}
+
+message StrategiesAllData {
+  repeated StrategyWithParameters items = 1;
+  int64 total = 2;
+}
+
+message StrategiesAllResponse {
+  string message = 1;
+  StrategiesAllData data = 2;
+}
+
+message AttributeResponse {
+  string message = 1;
+  AttributeWithValues data = 2;
+}
+
+message AttributesListData {
+  repeated AttributeWithValues items = 1;
+  int64 total = 2;
+}
+
+message AttributesListResponse {
+  string message = 1;
+  AttributesListData data = 2;
+}
+
+message AttributeValueResponse {
+  string message = 1;
+  AttributeValue data = 2;
+}
+
+message CreateStrategyRequest {
+  string slug = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdateStrategyRequest {
+  optional string slug = 1;
+  optional string name = 2;
+  optional string description = 3;
+}
+
+message ListStrategiesRequest {
+  optional string search = 1;
+  optional int32 page = 2;
+  optional int32 page_size = 3;
+  optional string sort = 4;
+}
+
+message GetStrategyRequest {
+  string strategy_ref = 1;
+}
+
+message UpdateStrategyByRefRequest {
+  string strategy_ref = 1;
+  UpdateStrategyRequest patch = 2;
+}
+
+message DeleteStrategyRequest {
+  string strategy_ref = 1;
+}
+
+message CloneStrategyItemInput {
+  string source_strategy_id = 1;
+  string slug = 2;
+}
+
+message CloneStrategiesRequest {
+  repeated CloneStrategyItemInput items = 1;
+}
+
+message CreateAttributeRequest {
+  string strategy_ref = 1;
+  string slug = 2;
+  string name = 3;
+  string description = 4;
+}
+
+message ListAttributesRequest {
+  string strategy_ref = 1;
+  optional string search = 2;
+  optional int32 page = 3;
+  optional int32 page_size = 4;
+  optional string sort = 5;
+}
+
+message GetAttributeRequest {
+  string strategy_ref = 1;
+  string attribute_ref = 2;
+}
+
+message UpdateAttributePatch {
+  optional string slug = 1;
+  optional string name = 2;
+  optional string description = 3;
+}
+
+message UpdateAttributeRequest {
+  string strategy_ref = 1;
+  string attribute_ref = 2;
+  UpdateAttributePatch patch = 3;
+}
+
+message DeleteAttributeRequest {
+  string strategy_ref = 1;
+  string attribute_ref = 2;
+}
+
+message CreateAttributeValueRelationInput {
+  optional string to_attribute_id = 1;
+  optional string to_attribute_slug = 2;
+  optional string to_value_id = 3;
+  optional string to_value_slug = 4;
+}
+
+message CreateAttributeValueRequest {
+  string strategy_ref = 1;
+  string attribute_ref = 2;
+  string slug = 3;
+  string value = 4;
+  repeated CreateAttributeValueRelationInput relations = 5;
+}
+
+message UpdateAttributeValueRelationInput {
+  string to_attribute_id = 1;
+  string to_value_id = 2;
+}
+
+message UpdateAttributeValuePatch {
+  optional string slug = 1;
+  optional string value = 2;
+  repeated UpdateAttributeValueRelationInput relations = 3;
+}
+
+message UpdateAttributeValueRequest {
+  string strategy_ref = 1;
+  string attribute_ref = 2;
+  string value_ref = 3;
+  UpdateAttributeValuePatch patch = 4;
+}
+
+message GraphAttributeRef {
+  optional string id = 1;
+  optional string slug = 2;
+}
+
+message GraphValueRef {
+  optional string id = 1;
+  optional string slug = 2;
+}
+
+message GraphRelationTargetRef {
+  GraphAttributeRef attribute_ref = 1;
+  GraphValueRef value_ref = 2;
+}
+
+message GraphActionCreateAttribute {
+  string slug = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message GraphActionUpdateAttribute {
+  GraphAttributeRef attribute_ref = 1;
+  optional string slug = 2;
+  optional string name = 3;
+  optional string description = 4;
+}
+
+message GraphActionDeleteAttribute {
+  GraphAttributeRef attribute_ref = 1;
+}
+
+message GraphActionCreateValue {
+  GraphAttributeRef attribute_ref = 1;
+  string slug = 2;
+  string value = 3;
+}
+
+message GraphActionUpdateValue {
+  GraphAttributeRef attribute_ref = 1;
+  GraphValueRef value_ref = 2;
+  optional string slug = 3;
+  optional string value = 4;
+}
+
+message GraphActionDeleteValue {
+  GraphAttributeRef attribute_ref = 1;
+  GraphValueRef value_ref = 2;
+}
+
+message GraphActionReplaceRelations {
+  GraphAttributeRef attribute_ref = 1;
+  GraphValueRef value_ref = 2;
+  repeated GraphRelationTargetRef relations = 3;
+}
+
+message StrategyGraphAction {
+  oneof action {
+    GraphActionCreateAttribute create_attribute = 1;
+    GraphActionUpdateAttribute update_attribute = 2;
+    GraphActionDeleteAttribute delete_attribute = 3;
+    GraphActionCreateValue create_value = 4;
+    GraphActionUpdateValue update_value = 5;
+    GraphActionDeleteValue delete_value = 6;
+    GraphActionReplaceRelations replace_relations = 7;
+  }
+}
+
+message BatchActionStrategyGraphRequest {
+  string strategy_ref = 1;
+  repeated StrategyGraphAction actions = 2;
+}
+
+message DeleteAttributeValueRequest {
+  string strategy_ref = 1;
+  string attribute_ref = 2;
+  string value_ref = 3;
+}

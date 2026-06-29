@@ -1,0 +1,196 @@
+rules:
+  - method: GET
+    path: /api/users
+    permission: identity:users:list
+
+  - method: POST
+    path: /api/users
+    permission: identity:users:create
+
+  - method: GET
+    path: /api/users/me
+    permission: identity:users:get
+    owner:
+      source: context
+      name: userId
+
+  - method: PUT
+    path: /api/users/me
+    permission: identity:users:update
+    owner:
+      source: context
+      name: userId
+
+  - method: DELETE
+    path: /api/users/me
+    permission: identity:users:delete
+    owner:
+      source: context
+      name: userId
+
+  - method: GET
+    path: /api/users/{userId}
+    permission: identity:users:get
+    owner:
+      source: path
+      name: userId
+
+  - method: PUT
+    path: /api/users/{userId}
+    permission: identity:users:update
+    owner:
+      source: path
+      name: userId
+
+  - method: DELETE
+    path: /api/users/{userId}
+    permission: identity:users:delete
+
+  - method: POST
+    path: /api/auth/logout
+    permission: identity:session:logout
+    owner:
+      source: context
+      name: userId
+
+  - method: POST
+    path: /connect/stratflow.identity.v1.IdentityService/Logout
+    permission: identity:session:logout
+    owner:
+      source: context
+      name: userId
+
+  - method: POST
+    path: /api/auth/refresh
+    permission: identity:session:refresh
+    owner:
+      source: context
+      name: userId
+
+  - method: GET
+    path: /api/strategies
+    permission: strategy:strategies:list
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/ListStrategies
+    permission: strategy:strategies:list
+
+  - method: GET
+    path: /api/strategies/all
+    permission: strategy:strategies:list
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/ListStrategiesAll
+    permission: strategy:strategies:list
+
+  - method: POST
+    path: /api/strategies
+    permission: strategy:strategies:create
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/CreateStrategy
+    permission: strategy:strategies:create
+
+  - method: POST
+    path: /api/strategies/clone
+    permission: strategy:strategies:create
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/CloneStrategies
+    permission: strategy:strategies:create
+
+  - method: GET
+    path: /api/strategies/{strategyId}
+    permission: strategy:strategies:get
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/GetStrategy
+    permission: strategy:strategies:get
+
+  - method: PATCH
+    path: /api/strategies/{strategyId}
+    permission: strategy:strategies:update
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/UpdateStrategy
+    permission: strategy:strategies:update
+
+  - method: DELETE
+    path: /api/strategies/{strategyId}
+    permission: strategy:strategies:delete
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/DeleteStrategy
+    permission: strategy:strategies:delete
+
+  - method: GET
+    path: /api/strategies/{strategyId}/attributes
+    permission: strategy:parameters:list
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/ListAttributes
+    permission: strategy:parameters:list
+
+  - method: POST
+    path: /api/strategies/{strategyId}/attributes
+    permission: strategy:parameters:create
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/CreateAttribute
+    permission: strategy:parameters:create
+
+  - method: GET
+    path: /api/strategies/{strategyId}/attributes/{parameterId}
+    permission: strategy:parameters:get
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/GetAttribute
+    permission: strategy:parameters:get
+
+  - method: PATCH
+    path: /api/strategies/{strategyId}/attributes/{parameterId}
+    permission: strategy:parameters:update
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/UpdateAttribute
+    permission: strategy:parameters:update
+
+  - method: DELETE
+    path: /api/strategies/{strategyId}/attributes/{parameterId}
+    permission: strategy:parameters:delete
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/DeleteAttribute
+    permission: strategy:parameters:delete
+
+  - method: POST
+    path: /api/strategies/{strategyId}/attributes/{parameterId}/values
+    permission: strategy:parameter_values:create
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/CreateAttributeValue
+    permission: strategy:parameter_values:create
+
+  - method: PATCH
+    path: /api/strategies/{strategyId}/attributes/{parameterId}/values/{valueId}
+    permission: strategy:parameter_values:update
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/UpdateAttributeValue
+    permission: strategy:parameter_values:update
+
+  - method: PATCH
+    path: /api/strategies/{strategyId}/graph
+    permission: strategy:parameter_values:update
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/BatchActionStrategyGraph
+    permission: strategy:parameter_values:update
+
+  - method: DELETE
+    path: /api/strategies/{strategyId}/attributes/{parameterId}/values/{valueId}
+    permission: strategy:parameter_values:delete
+
+  - method: POST
+    path: /connect/stratflow.strategyregistry.v1.StrategyRegistryService/DeleteAttributeValue
+    permission: strategy:parameter_values:delete
